@@ -9,4 +9,23 @@
     <PackageReference Include="log4net" Version="2.0.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="logs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SolidWorks.Interop.sldworks">
+      <HintPath>..\..\..\..\..\..\Program Files\SolidWorks Corp\SolidWorks\api\redist\SolidWorks.Interop.sldworks.dll</HintPath>
+    </Reference>
+    <Reference Include="SolidWorks.Interop.swconst">
+      <HintPath>..\..\..\..\..\..\Program Files\SolidWorks Corp\SolidWorks\api\redist\SolidWorks.Interop.swconst.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

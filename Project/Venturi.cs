@@ -20,13 +20,17 @@ namespace Project
             {
                 if (!value.Equals(_name))
                 {
-                    if (!string.IsNullOrWhiteSpace(value))
+                    if (!string.IsNullOrWhiteSpace(value) && value.Length>5)
                     {
                         _name = value;
                     }
                     else if (value == null)
                     {
                         throw new ArgumentNullException($"{nameof(Name)} не может быть пустым", nameof(Name));
+                    }
+                    else if (value.Length < 5)
+                    {
+                        throw new ArgumentException($"{nameof(Name)} не может быть меньше 5 символов", nameof(Name));
                     }
                     else
                     {
