@@ -8,6 +8,7 @@ namespace Project
 
         static void Main(string[] args)
         {
+            
             Logger.InitLogger();
             Logger.Log.Info("Старт программы.");
             Logger.Log.Info(System.Reflection.Assembly.GetExecutingAssembly().GetName().FullName);

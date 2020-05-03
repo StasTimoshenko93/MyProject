@@ -33,6 +33,7 @@ namespace Project
             {
                
                 CurrentVenturi = new Venturi(name);
+
                 CreateEvent?.Invoke(this, new NewVentEventArgs($"Аппарат создан {CurrentVenturi.Name}"));
                 Venturis.Add(CurrentVenturi);
                 IsNewVent = true;
@@ -49,6 +50,8 @@ namespace Project
             CalculateEvent?.Invoke(this, new NewVentEventArgs($"Аппарат расcчитан"));
             CurrentVenturi.BirthayDate = birthday;
             CurrentVenturi.Value = value;
+            ModelSolid model = new ModelSolid(CurrentVenturi);
+            model.CreatePart();
            await Task.Run(()=>Save());
         }
 
