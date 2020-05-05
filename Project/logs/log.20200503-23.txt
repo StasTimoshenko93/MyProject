@@ -1,0 +1,12 @@
+2020-05-03 23:06:05,120 [1] INFO Project.Logger - Старт программы.
+2020-05-03 23:06:05,159 [1] INFO Project.Logger - Project, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2020-05-03 23:12:56,587 [1] INFO Project.Logger - Старт программы.
+2020-05-03 23:12:56,605 [1] INFO Project.Logger - Project, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2020-05-03 23:12:58,868 [1] INFO Project.Logger - Проверка из существующих.
+2020-05-03 23:13:03,575 [1] INFO Project.Logger - Удаление.
+2020-05-03 23:14:53,229 [1] INFO Project.Logger - Старт программы.
+2020-05-03 23:14:53,245 [1] INFO Project.Logger - Project, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2020-05-03 23:14:54,372 [1] INFO Project.Logger - Проверка из существующих.
+2020-05-03 23:16:35,016 [1] INFO Project.Logger - Старт программы.
+2020-05-03 23:16:35,036 [1] INFO Project.Logger - Project, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2020-05-03 23:16:36,320 [1] INFO Project.Logger - Проверка из существующих.

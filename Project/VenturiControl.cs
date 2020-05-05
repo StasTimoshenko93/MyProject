@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace Project
@@ -13,7 +13,7 @@ namespace Project
         public event EventHandler<NewVentEventArgs> CreateEvent;
         public event EventHandler<NewVentEventArgs> CalculateEvent;
         public event EventHandler<NewVentEventArgs> SaveEvent;
-
+        public event EventHandler<NewVentEventArgs> LetterEvent;
         private List<Venturi> Venturis { get; }
         public Venturi CurrentVenturi { get; }
         public bool IsNewVent { get; } = false;
@@ -31,20 +31,19 @@ namespace Project
 
             if (CurrentVenturi == null)
             {
-               
-                CurrentVenturi = new Venturi(name);
 
+                CurrentVenturi = new Venturi(name);
                 CreateEvent?.Invoke(this, new NewVentEventArgs($"Аппарат создан {CurrentVenturi.Name}"));
+                SendEmailAsync().GetAwaiter();
                 Venturis.Add(CurrentVenturi);
                 IsNewVent = true;
-               
+
             }
             else
             {
                 Console.WriteLine("Данный аппарат существует. Нажмите 2, чтобы посмотреть все существующие аппараты.");
             }
         }
-        // Метод настрайвает данные в классе Venturi
         public async void SetNewVenturiData(DateTime birthday, ValueClass value)
         {
             CalculateEvent?.Invoke(this, new NewVentEventArgs($"Аппарат расcчитан"));
@@ -52,10 +51,9 @@ namespace Project
             CurrentVenturi.Value = value;
             ModelSolid model = new ModelSolid(CurrentVenturi);
             model.CreatePart();
-           await Task.Run(()=>Save());
+            await Task.Run(() => Save());
         }
 
-       
         // Метод показывает все аппараты.
         public void ShowAll()
         {
@@ -67,10 +65,10 @@ namespace Project
         }
 
         // Метод показывает характеристики и расчет аппарата.
-        public void ShowSingle ()
+        public void ShowSingle()
         {
             int index = CheckClass.ParseInt("Аппарат");
-            var vent = Venturis[index-1];
+            var vent = Venturis[index - 1];
             var ventIn = vent.Value;
             Console.WriteLine($"Имя: {vent.Name}");
             Console.WriteLine($"Дата создания: {vent.BirthayDate}");
@@ -106,15 +104,38 @@ namespace Project
         }
 
         // Метод загрузки данных.
-         public List<Venturi> GetData()
+        public List<Venturi> GetData()
         {
             return Load<Venturi>() ?? new List<Venturi>();
         }
         // Метод Сохранения.
-         public  void Save()
+        public void Save()
         {
-           SaveEvent?.Invoke(this, new NewVentEventArgs("Аппарат сохранен"));
-           Save(Venturis);
+            SaveEvent?.Invoke(this, new NewVentEventArgs("Аппарат сохранен"));
+            Save(Venturis);
+        }
+
+        private async Task SendEmailAsync()
+        {
+            Logger.Log.Info("Отправка Email");
+            MailAddress from = new MailAddress("stastimoshenkogit@gmail.com", "Stas");
+            MailAddress to = new MailAddress("stastimoshenkoprog@gmail.com");
+            MailMessage m = new MailMessage(from, to);
+            m.Subject = "Аппарат ТСА";
+            m.Body = $"Новый Аппарат создан. И доступен для изготовления.";
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+            smtp.Credentials = new NetworkCredential("stastimoshenkogit@gmail.com", "");
+            smtp.EnableSsl = true;
+            try
+            {
+                await smtp.SendMailAsync(m);
+                LetterEvent?.Invoke(this, new NewVentEventArgs("Письмо отправлено."));
+            }
+            catch (Exception e)
+            {
+                Logger.Log.Error(e.Message);
+                Console.WriteLine("Доставка не получилась.");
+            }
         }
     }
 }

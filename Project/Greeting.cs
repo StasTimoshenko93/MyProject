@@ -29,7 +29,7 @@ namespace Project
             switch (pushButton)
             {
                 case "1":
-                    Logger.Log.Info("Создание аппарата");
+                    Logger.Log.Info("Проверка на наличие.");
                     Console.WriteLine("Введите имя аппарата. Например - ТСА-10.");
 
                     var name = Console.ReadLine();
@@ -49,7 +49,7 @@ namespace Project
                     VenturiControl vc = new VenturiControl();
                     Console.WriteLine("Вы выбрали показ существующих аппаратов: ");
                     vc.ShowAll();
-                    Console.WriteLine("Выберите действие: 1 - Показ. 2 - Удаление.");
+                    Console.WriteLine("Выберите действие: 1 - Показ. 2 - Удаление. 3 - Выход.");
                     string button = Console.ReadLine();
                     switch (button)
                     {
@@ -60,6 +60,10 @@ namespace Project
                         case "2":
                             Logger.Log.Info("Удаление.");
                             vc.Delete();
+                            break;
+                        case "3":
+
+                            Environment.Exit(0);
                             break;
                         default:
                             Console.WriteLine("Ошибка. Вводимое значение не соответствует ни одной из команд управления");

@@ -9,16 +9,27 @@ namespace Project
 {
     class ModelSolid
     {
-        
-        public string PartName { get; set; } = "Partname";
+        private string PartName;
+        private double ThroatDim;
+        private double ThroatLength;
+        private double ConfDim;
+        private double ConfLength;
+        private double DiffLength;
+        private double Lengthfistline = 200;
+        private double AllLength;
+
         SldWorks swApp;
         ModelDoc2 swModel;
-        Feature swFeature;
-        bool status;
         string defaultPartTemplate;
-        public ModelSolid(Venturi obj)
+        public ModelSolid(Venturi mod)
         {
-            
+            PartName = mod.Name;
+            ThroatDim = mod.Value.DiamThroat;
+            ThroatLength = mod.Value.LengthThroat;
+            ConfDim = mod.Value.DiamConfandDiff;
+            ConfLength = mod.Value.LengthConf;
+            DiffLength = mod.Value.LengthDif;
+            AllLength = mod.Value.LengthThroat+ mod.Value.LengthConf + Lengthfistline+mod.Value.LengthDif;
         }
         public void CreatePart()
         {
@@ -61,7 +72,7 @@ namespace Project
             swModel.ISelectionManager.EnableContourSelection = false;
             swModel.ViewZoomtofit2();
             swModel.ForceRebuild3(true);
-            swModel.SaveAs("1.SPLDRT");
+            swModel.SaveAs(PartName + ".SPLDRT");
             swApp = null;
         }
     }

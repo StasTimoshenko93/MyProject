@@ -11,6 +11,7 @@ namespace Project
             obj.CreateEvent += Usermsg;
             obj.CalculateEvent += Usermsg;
             obj.SaveEvent += Usermsg;
+            obj.LetterEvent += Usermsg;
         }
 
         private void Usermsg(object sender, NewVentEventArgs e)
