@@ -87,12 +87,12 @@ namespace Project
         #region Расчет Технологических параметров
         private double SetTempOut()
         {
-            return Math.Round((0.133 - (0.0041 * GasLiqDensity)) * TempuratureIn + 35);
+            return (0.133 - (0.0041 * GasLiqDensity)) * TempuratureIn + 35;
         }
 
         private double SetVolOut()
         {
-            return Math.Round((AirVolumeIn * (TempuratureOut + TInK)) / (TempuratureIn + TInK));
+            return (AirVolumeIn * (TempuratureOut + TInK)) / (TempuratureIn + TInK);
         }
 
         private double SetPInDryThroat()
@@ -107,14 +107,14 @@ namespace Project
 
         private double SetPinWetThroat()
         {
-            return Math.Round(((C1 * DesnityAir) + (ResistWetThroat * GasLiqDensity * DensityLiq) * Math.Pow(SpeedInThroat, 2)) / 2);
+            return ((C1 * DesnityAir) + (ResistWetThroat * GasLiqDensity * DensityLiq) * Math.Pow(SpeedInThroat, 2)) / 2;
         }
         #endregion
 
         #region Расчет механических параметров.
         private double SetDiamThroat()
         {
-            return Math.Round(1.13 * Math.Sqrt(AirVolumeOut / (SpeedInThroat * SecondPerHour)));
+            return 1.13 * Math.Sqrt(AirVolumeOut / (SpeedInThroat * SecondPerHour));
         }
         private double SetLengthThroat()
         {

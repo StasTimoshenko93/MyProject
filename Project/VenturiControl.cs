@@ -14,12 +14,14 @@ namespace Project
         public event EventHandler<NewVentEventArgs> CalculateEvent;
         public event EventHandler<NewVentEventArgs> SaveEvent;
         public event EventHandler<NewVentEventArgs> LetterEvent;
+        private MyLogger log { get; }
         private List<Venturi> Venturis { get; }
         public Venturi CurrentVenturi { get; }
         public bool IsNewVent { get; } = false;
 
         public VenturiControl()
         {
+            MyLogger log = new MyLogger();
             Venturis = GetData();
         }
 
@@ -117,7 +119,7 @@ namespace Project
 
         private async Task SendEmailAsync()
         {
-            Logger.Log.Info("Отправка Email");
+            log.Info("Отправка Email");
             MailAddress from = new MailAddress("stastimoshenkogit@gmail.com", "Stas");
             MailAddress to = new MailAddress("stastimoshenkoprog@gmail.com");
             MailMessage m = new MailMessage(from, to);
@@ -133,7 +135,7 @@ namespace Project
             }
             catch (Exception e)
             {
-                Logger.Log.Error(e.Message);
+                log.Error($"Ошибка в доставке e-mail {e.Message}");
                 Console.WriteLine("Доставка не получилась.");
             }
         }

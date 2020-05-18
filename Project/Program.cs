@@ -5,13 +5,11 @@ namespace Project
 {
     class Program
     {
-
         static void Main(string[] args)
         {
+            MyLogger log = new MyLogger();
+            log.Info("CreateProgram");
             
-            Logger.InitLogger();
-            Logger.Log.Info("Старт программы.");
-            Logger.Log.Info(System.Reflection.Assembly.GetExecutingAssembly().GetName().FullName);
             Greeting App = new Greeting();
             App.Hello();
 
@@ -24,7 +22,7 @@ namespace Project
                 }
                 catch (Exception e)
                 {
-                    Logger.Log.Error(e.Message);
+                    log.Error("Error");
                     Console.WriteLine(e.Message);
                 }
             }

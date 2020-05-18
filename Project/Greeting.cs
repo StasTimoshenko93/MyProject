@@ -21,7 +21,6 @@ namespace Project
             Console.WriteLine("3 - Выход из приложения\n");
             Console.WriteLine("Начало работы.");
         }
-
         public  void Start()
         {
             string pushButton = Console.ReadLine();
@@ -29,23 +28,18 @@ namespace Project
             switch (pushButton)
             {
                 case "1":
-                    Logger.Log.Info("Проверка на наличие.");
                     Console.WriteLine("Введите имя аппарата. Например - ТСА-10.");
-
                     var name = Console.ReadLine();
                     VenturiControl venturiconroler = new VenturiControl(name);
                     UserSender user = new UserSender(venturiconroler);
                     if (venturiconroler.IsNewVent)
                     {
-               
-                        Logger.Log.Info("Создание аппарата.");
                         var birthday = DateTime.Now;
                         var inputvalue = ValueClass.inputValue();
                         venturiconroler.SetNewVenturiData(birthday, inputvalue);
                     }
                     break;
                 case "2":
-                    Logger.Log.Info("Проверка из существующих.");
                     VenturiControl vc = new VenturiControl();
                     Console.WriteLine("Вы выбрали показ существующих аппаратов: ");
                     vc.ShowAll();
@@ -54,11 +48,11 @@ namespace Project
                     switch (button)
                     {
                         case "1":
-                            Logger.Log.Info("Показ существующих.");
+                            //Logger.Log.Info("Показ существующих.");
                             vc.ShowSingle();
                             break;
                         case "2":
-                            Logger.Log.Info("Удаление.");
+                            //Logger.Log.Info("Удаление.");
                             vc.Delete();
                             break;
                         case "3":
@@ -71,7 +65,6 @@ namespace Project
                     }
                     break;
                 case "3":
-                    Logger.Log.Info("Выход из приложения.");
                     Console.WriteLine("Вы выбрали выход из приложения.");
                     Environment.Exit(0);
                     break;
