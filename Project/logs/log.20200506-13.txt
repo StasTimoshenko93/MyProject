@@ -1,8 +1,0 @@
-2020-05-06 13:20:47,480 [1] INFO Project.Logger - Старт программы.
-2020-05-06 13:20:47,533 [1] INFO Project.Logger - Project, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-2020-05-06 13:21:21,067 [1] INFO Project.Logger - Проверка на наличие.
-2020-05-06 13:21:24,508 [1] ERROR Project.Logger - Name не может быть меньше 5 символов (Parameter 'Name')
-2020-05-06 13:21:28,953 [1] INFO Project.Logger - Проверка на наличие.
-2020-05-06 13:21:31,791 [1] INFO Project.Logger - Отправка Email
-2020-05-06 13:21:32,071 [1] INFO Project.Logger - Создание аппарата.
-2020-05-06 13:21:33,035 [4] ERROR Project.Logger - The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.7.0 Authentication Required. Learn more at

@@ -1,2 +1,0 @@
-2020-05-15 13:43:42,407 [1] INFO Project.Logger - Старт программы.
-2020-05-15 13:43:42,432 [1] INFO Project.Logger - Project, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
