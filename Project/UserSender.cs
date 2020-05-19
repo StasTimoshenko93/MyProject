@@ -13,10 +13,8 @@ namespace Project
             obj.SaveEvent += Usermsg;
             obj.LetterEvent += Usermsg;
         }
-
         private void Usermsg(object sender, NewVentEventArgs e)
         {
-
             Console.WriteLine($"{e.Msg}");
         }
     }

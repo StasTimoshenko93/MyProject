@@ -8,9 +8,9 @@ namespace Project
         static void Main(string[] args)
         {
             MyLogger log = new MyLogger();
-            log.Info("CreateProgram");
+            log.Info("Старт программы.");
             
-            Greeting App = new Greeting();
+            Greeting App = new Greeting(log);
             App.Hello();
 
             while (true)

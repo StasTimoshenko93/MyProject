@@ -6,6 +6,11 @@ namespace Project
 {
     class Greeting
     {
+        MyLogger mylog;
+        public Greeting(MyLogger log)
+        {
+            mylog = log;
+        }
         public void Hello()
         {
             Console.WriteLine($"{DateTime.Now}");
@@ -28,18 +33,21 @@ namespace Project
             switch (pushButton)
             {
                 case "1":
+                    mylog.Info("Создание аппарата.");
                     Console.WriteLine("Введите имя аппарата. Например - ТСА-10.");
                     var name = Console.ReadLine();
                     VenturiControl venturiconroler = new VenturiControl(name);
                     UserSender user = new UserSender(venturiconroler);
                     if (venturiconroler.IsNewVent)
                     {
+                        mylog.Info("Ввод новых данных.");
                         var birthday = DateTime.Now;
                         var inputvalue = ValueClass.inputValue();
                         venturiconroler.SetNewVenturiData(birthday, inputvalue);
                     }
                     break;
                 case "2":
+                    mylog.Info("Показ существующих");
                     VenturiControl vc = new VenturiControl();
                     Console.WriteLine("Вы выбрали показ существующих аппаратов: ");
                     vc.ShowAll();
@@ -48,11 +56,11 @@ namespace Project
                     switch (button)
                     {
                         case "1":
-                            //Logger.Log.Info("Показ существующих.");
+                            mylog.Info("Показ аппарата.");
                             vc.ShowSingle();
                             break;
                         case "2":
-                            //Logger.Log.Info("Удаление.");
+                            mylog.Info("Удаление.");
                             vc.Delete();
                             break;
                         case "3":
@@ -60,6 +68,7 @@ namespace Project
                             Environment.Exit(0);
                             break;
                         default:
+                            mylog.Info("Выход.");
                             Console.WriteLine("Ошибка. Вводимое значение не соответствует ни одной из команд управления");
                             break;
                     }
@@ -69,6 +78,7 @@ namespace Project
                     Environment.Exit(0);
                     break;
                 default:
+                    mylog.Debug("Ошибка значения.");
                     Console.WriteLine("Ошибка. Вводимое значение не соответствует ни одной из команд управления");
                     break;
             }

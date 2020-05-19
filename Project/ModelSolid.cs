@@ -43,13 +43,10 @@ namespace Project
             {
                 throw new ArgumentException("Чертеж уже существует.");
             }
-
             swApp = GetSolidWorks.GetApplication();
-
             defaultPartTemplate = swApp.GetUserPreferenceStringValue((int)swUserPreferenceStringValue_e.swDefaultTemplatePart);
             swApp.NewDocument(defaultPartTemplate, 0, 0, 0);
             swModel = (ModelDoc2)swApp.ActiveDoc;
-
             swModel.Extension.SelectByID2("Front Plane", "PLANE", 0, 0, 0, false, 0, null, 0);
             swModel.SketchManager.InsertSketch(true);
             swModel.ClearSelection2(true);
@@ -73,7 +70,7 @@ namespace Project
             swModel.ViewZoomtofit2();
             swModel.ForceRebuild3(true);
             swModel.SaveAs(PartName + ".SPLDRT");
-            swApp = null;
+            swApp = null; 
         }
     }
 }

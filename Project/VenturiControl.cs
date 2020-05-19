@@ -14,14 +14,13 @@ namespace Project
         public event EventHandler<NewVentEventArgs> CalculateEvent;
         public event EventHandler<NewVentEventArgs> SaveEvent;
         public event EventHandler<NewVentEventArgs> LetterEvent;
-        private MyLogger log { get; }
         private List<Venturi> Venturis { get; }
         public Venturi CurrentVenturi { get; }
         public bool IsNewVent { get; } = false;
 
         public VenturiControl()
         {
-            MyLogger log = new MyLogger();
+
             Venturis = GetData();
         }
 
@@ -33,7 +32,7 @@ namespace Project
 
             if (CurrentVenturi == null)
             {
-
+                //log.Info("Создание Аппарата");
                 CurrentVenturi = new Venturi(name);
                 CreateEvent?.Invoke(this, new NewVentEventArgs($"Аппарат создан {CurrentVenturi.Name}"));
                 SendEmailAsync().GetAwaiter();
@@ -43,7 +42,7 @@ namespace Project
             }
             else
             {
-                Console.WriteLine("Данный аппарат существует. Нажмите 2, чтобы посмотреть все существующие аппараты.");
+              Console.WriteLine("Данный аппарат существует. Нажмите 2, чтобы посмотреть все существующие аппараты.");
             }
         }
         public async void SetNewVenturiData(DateTime birthday, ValueClass value)
@@ -81,14 +80,14 @@ namespace Project
             Console.WriteLine($"Перепад давления при орошении, Па.: {ventIn.PressureInWetThroat}");
             Console.WriteLine("\n\n");
             Console.WriteLine($"Материал изготовления: {ventIn.Material}");
-            Console.WriteLine($"Диаметр входного газохода, мм: {ventIn.DiamTubeIn}");
-            Console.WriteLine($"Диаметр сопла, мм: {ventIn.DiamThroat}");
-            Console.WriteLine($"Длина сопла, мм: {ventIn.LengthThroat}");
-            Console.WriteLine($"Диаметр конффузора и диффузора, мм: {ventIn.DiamConfandDiff}");
-            Console.WriteLine($"Длина конффузора, мм: {ventIn.LengthConf}");
-            Console.WriteLine($"Длина диффузора, мм: {ventIn.LengthDif}");
-            Console.WriteLine($"Диаметр  каплиуловителя, мм: {ventIn.DiamBoil}");
-            Console.WriteLine($"Длина каплиуловителя, мм: {ventIn.LengthBoil}");
+            Console.WriteLine($"Диаметр входного газохода, м: {ventIn.DiamTubeIn}");
+            Console.WriteLine($"Диаметр сопла, м: {ventIn.DiamThroat}");
+            Console.WriteLine($"Длина сопла, м: {ventIn.LengthThroat}");
+            Console.WriteLine($"Диаметр конффузора и диффузора, м: {ventIn.DiamConfandDiff}");
+            Console.WriteLine($"Длина конффузора, м: {ventIn.LengthConf}");
+            Console.WriteLine($"Длина диффузора, м: {ventIn.LengthDif}");
+            Console.WriteLine($"Диаметр  каплиуловителя, м: {ventIn.DiamBoil}");
+            Console.WriteLine($"Длина каплиуловителя, м: {ventIn.LengthBoil}");
         }
         public void Delete()
         {
@@ -119,7 +118,6 @@ namespace Project
 
         private async Task SendEmailAsync()
         {
-            log.Info("Отправка Email");
             MailAddress from = new MailAddress("stastimoshenkogit@gmail.com", "Stas");
             MailAddress to = new MailAddress("stastimoshenkoprog@gmail.com");
             MailMessage m = new MailMessage(from, to);
@@ -135,8 +133,7 @@ namespace Project
             }
             catch (Exception e)
             {
-                log.Error($"Ошибка в доставке e-mail {e.Message}");
-                Console.WriteLine("Доставка не получилась.");
+                Console.WriteLine($"\n\nДоставка письма не получилась. {e.Message}");
             }
         }
     }

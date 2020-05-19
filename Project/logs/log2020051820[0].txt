@@ -1,0 +1,2 @@
+﻿2020051820 
+2020051820 [Project, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null][.ctor][1][INFO] CreateProgram

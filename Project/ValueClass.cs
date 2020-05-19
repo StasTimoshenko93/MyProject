@@ -9,7 +9,7 @@ namespace Project
         #region Константы
         private const double C1 = 0.14;
         private const double A = 0.63;
-        private const double B = -0.3;
+        private const double B = 0.3;
         private const int DensityLiq = 1000;
         private const int SecondPerHour = 3600;
         private const int SpeedInTube = 10;
@@ -102,7 +102,7 @@ namespace Project
 
         private double SetResistWetThroat()
         {
-            return A * C1 * Math.Pow(GasLiqDensity, B);
+            return A * C1 * Math.Pow(GasLiqDensity, -B);
         }
 
         private double SetPinWetThroat()

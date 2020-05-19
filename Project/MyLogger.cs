@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -16,14 +15,14 @@ namespace Project
         private readonly string getMethod;
         private readonly string getAssembley;
         private readonly string threadName;
-
         public MyLogger()
         {
             getAssembley = System.Reflection.Assembly.GetExecutingAssembly().GetName().FullName;
             getMethod = System.Reflection.MethodBase.GetCurrentMethod().Name;
             Thread thread = Thread.CurrentThread;
-            threadName = thread.Name;
+            threadName = thread.ManagedThreadId.ToString();
             datetimeFormat = "yyyyMMddHH";
+            counter++;
             logFilename = $"log{DateTime.Now.ToString(datetimeFormat)}[{counter}]{FILE_EXT}";
             path = @$"C:\Users\timos\source\Project\Solution\Project\logs\{logFilename}";
             if (File.Exists(path))
@@ -53,7 +52,7 @@ namespace Project
         {
             try
             {
-                using (StreamWriter writer = new StreamWriter(path, append, System.Text.Encoding.UTF8))
+                using (StreamWriter writer = new StreamWriter(path, append, Encoding.UTF8))
                 {
                     if (!string.IsNullOrEmpty(text))
                     {
@@ -70,15 +69,14 @@ namespace Project
         {
             string pretext;
             switch (level)
-            {
-                case LogLevel.INFO:
-                    pretext = $"{DateTime.Now.ToString(datetimeFormat)} [{getAssembley}][{getMethod}][{threadName}][INFO] ";
+            {                case LogLevel.INFO:
+                    pretext = $"{DateTime.Now} [{getAssembley}][{getMethod}][{threadName}][INFO] ";
                     break;
                 case LogLevel.DEBUG:
-                    pretext = $"{DateTime.Now.ToString(datetimeFormat)} [{getAssembley}][{getMethod}][{threadName}][DEBUG] ";
+                    pretext = $"{DateTime.Now} [{getAssembley}][{getMethod}][{threadName}][DEBUG] ";
                     break;
                 case LogLevel.ERROR:
-                    pretext = $"{DateTime.Now.ToString(datetimeFormat)} [{getAssembley}][{getMethod}][{threadName}][ERROR] ";
+                    pretext = $"{DateTime.Now} [{getAssembley}][{getMethod}][{threadName}][ERROR] ";
                     break;
                 default:
                     pretext = "";
